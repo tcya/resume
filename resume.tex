@@ -1,0 +1,375 @@
+%!TEX program = xelatex
+\documentclass[12pt,letterpaper]{article}
+
+\def\myauthor{Xunmo Yang}
+\def\mytitle{XY-vita}
+\def\myemail{xunmoyang@gmail.com}
+%\def\myweb{pdgessler}
+\def\myphone{832-519-8420}
+\def\mykeywords{
+  Xunmo Yang,
+  resume,
+  curriculum,
+  vita,
+  curriculum vita,
+  cv,
+  xunmo,
+  pdg
+}
+
+\setlength\parindent{0pt}
+
+\newenvironment{itemize*}%
+{\begin{itemize}%
+  \setlength{\itemsep}{0pt}}%
+{\end{itemize}}
+
+\usepackage[hyphens]{url}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+%\usepackage{ocgtools}
+\usepackage{enumitem}
+\setlist{nolistsep,leftmargin=0.15in}
+\usepackage[log-declarations=false]{xparse}
+\usepackage[adobe-garamond]{mathdesign}
+\usepackage[no-math]{fontspec}
+\usepackage{microtype}
+%\usepackage[margin=1.125in,top=1.375in,right=1in,left=2in]{geometry}
+\usepackage[margin=1.2in,top=0.8in,right=0.7in,left=1.5in, bottom=1.3in]{geometry}
+\usepackage[strict]{changepage}
+\usepackage{fontawesome}
+\usepackage[
+  ocgcolorlinks,
+  urlcolor={[rgb]{0,0,0.54}},
+  unicode,
+  plainpages=false,
+  pdfpagelabels,
+  pdftitle={\mytitle},
+  pdfauthor={\myauthor},
+  pdfkeywords={\mykeywords},
+  breaklinks=true
+]{hyperref}
+%\usepackage[anythingbreaks]{breakurl}
+
+% fix ocgcolor link breaking; thanks due to Benjamin Lerner (http://goo.gl/VZKR7M)
+\makeatletter
+\AtBeginDocument{%
+  \newlength{\temp@x}%
+  \newlength{\temp@y}%
+  \newlength{\temp@w}%
+  \newlength{\temp@h}%
+  \def\my@coords#1#2#3#4{%
+    \setlength{\temp@x}{#1}%
+    \setlength{\temp@y}{#2}%
+    \setlength{\temp@w}{#3}%
+    \setlength{\temp@h}{#4}%
+    \adjustlengths{}%
+    \my@pdfliteral{\strip@pt\temp@x\space\strip@pt\temp@y\space\strip@pt\temp@w\space\strip@pt\temp@h\space re}}%
+  \ifpdf
+    \typeout{In PDF mode}%
+    \def\my@pdfliteral#1{\pdfliteral page{#1}}% I don't know why % this command...
+    \def\adjustlengths{}%
+  \fi
+  \ifxetex
+    \def\my@pdfliteral #1{\special{pdf: literal direct #1}}% isn't equivalent to this one
+    \def\adjustlengths{\setlength{\temp@h}{-\temp@h}\addtolength{\temp@y}{1in}\addtolength{\temp@x}{-1in}}%
+  \fi%
+  \def\Hy@colorlink#1{%
+    \begingroup
+      \ifHy@ocgcolorlinks
+        \def\Hy@ocgcolor{#1}%
+        \my@pdfliteral{q}%
+        \my@pdfliteral{7 Tr}% Set text mode to clipping-only
+      \else
+        \HyColor@UseColor#1%
+      \fi
+  }%
+  \def\Hy@endcolorlink{%
+    \ifHy@ocgcolorlinks%
+      \my@pdfliteral{/OC/OCPrint BDC}%
+      \my@coords{0pt}{0pt}{\pdfpagewidth}{\pdfpageheight}%
+      \my@pdfliteral{F}% Fill clipping path (the url's text) with current color
+      \my@pdfliteral{EMC/OC/OCView BDC}%
+      \begingroup%
+        \expandafter\HyColor@UseColor\Hy@ocgcolor%
+        \my@coords{0pt}{0pt}{\pdfpagewidth}{\pdfpageheight}%
+        \my@pdfliteral{F}% Fill clipping path (the url's text) with \Hy@ocgcolor
+      \endgroup%
+      \my@pdfliteral{EMC}%
+      \my@pdfliteral{0 Tr}% Reset text to normal mode
+      \my@pdfliteral{Q}%
+    \fi
+    \endgroup
+  }%
+}
+\makeatother
+% end fixes
+
+\newcommand{\ML}{\textsc{Matlab}}
+\newcommand{\Simu}{Simulink}
+\newcommand{\MLS}{\ML{}/\Simu{}}
+\newcommand{\apdl}{\textsc{APDL}}
+\newcommand{\ansys}{\textsc{Ansys}}
+\newcommand{\fluent}{\textsc{Fluent}}
+\newcommand\CPP{C/C\ensuremath{+}\ensuremath{+}}
+\newcommand{\Star}{\textsc{Star-CCM\ensuremath{+}}}
+
+\newcommand{\mhead}[1]{\leavevmode\marginpar{\sffamily\footnotesize #1}}
+\newcommand{\rdate}[1]{{\addfontfeature{Numbers=OldStyle} \hfill #1}}
+\renewcommand{\date}[1]{{\addfontfeature{Numbers=OldStyle} #1}}
+\renewcommand{\labelitemi}{-}
+
+\setmainfont[
+  Ligatures={TeX,Common},
+  BoldFont={AGaramondPro-Semibold},
+]{Adobe Garamond Pro}
+\setsansfont[
+  Ligatures={TeX,Common},
+  Letters=SmallCaps,
+  Color=660000,
+]{Adobe Garamond Pro}
+\setmonofont[Scale=0.85]{FontAwesome}
+
+\makeatletter % fix for \hrulefill w/ mathdesign package
+\def\hrulefill{\leavevmode\leaders \hrule height \rulethickness \hfill\kern\z@}
+\makeatletter
+
+\begin{document}\flushbottom
+\pagestyle{fancy} \setlength\headwidth{6.9in}
+\rhead{\textsc{Xunmo Yang - r\'{e}sum\'{e} - \thepage{} of \pageref*{LastPage}}} \cfoot{}
+\thispagestyle{empty}
+\begin{adjustwidth}{-1in}{}
+%{\Huge
+%  {\textsc{%
+%    {\addfontfeature{Style=TitlingCaps}P}\kern-1.5ptaul
+%    {\addfontfeature{Style=TitlingCaps}D}\kern-2pt.~%
+%    {\addfontfeature{Style=TitlingCaps}G}essler}
+%  }
+%}
+
+{\Huge
+  {\textsc{%
+    {\addfontfeature{Style=TitlingCaps}X}\kern-1.5pt unmo
+%    {\addfontfeature{Style=TitlingCaps}D}\kern-2pt.~%
+    {\addfontfeature{Style=TitlingCaps}Y}ang}
+  }
+}
+\hfill\hfill\hfill
+{
+  \begin{minipage}[b]{1.8in}
+    \flushleft
+%    \footnotesize
+    \small
+%    14019 Cypress Meadows Drive \\
+%    Houston, TX~~77047\\
+    832-519-8420\\
+    \href{mailto:\myemail}{\myemail} \\
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{2in}
+    \flushright
+%    \footnotesize
+    \small
+%    \href{tel:\myphone}{\myphone} \\ %\texttt{?}~
+%    \href{mailto:\myemail}{\myemail} \\
+    \href{https://www.github.com/tcya}{\faGithub~~https://github.com/tcya}\\
+    \href{https://www.linkedin.com/in/xunmoyang}{\faLinkedin~~linkedin.com/in/xunmoyang}
+  \end{minipage}
+}\par
+\hrulefill
+\end{adjustwidth}
+\reversemarginpar
+\setlength\marginparwidth{0.85in}
+\smallskip
+\mhead{Education}%
+%\textbf{Udacity} - Machine Learning nanodegree \hfill {\rdate{\textsc{February} 2016}} \newline
+%\smallskip
+%\textbf{Udacity} - Data Analyst Nanodegree \hfill {\rdate{\textsc{September} 2015}} \newline
+%\smallskip
+\textbf{University of Houston} - Houston, TX, US  \\
+\emph{Ph.D, Chemistry (GPA: 3.6)} \rdate{\textsc{May} 2016}
+\begin{itemize*}
+%  \item Cumulative GPA: 3.44/4.00; {Energy Systems Specialization}
+  \item Dissertation: \href{https://github.com/tcya/PhD-thesis}{\emph{Ab initio} Calculations of Intramolecular Charge and Energy Transfer with Reduced Modes in Donor-bridge-acceptor Species}
+  \item Advisor: Dr. \href{http://www.chem.uh.edu/people/faculty/Bittner/honors.php}{Eric R. Bittner}
+%  \item Coursework:\newline
+%    \begin{tabular}{ll}
+%      \addlinespace\toprule
+%      Advanced Engineering Mathematics & Transport Phenomena \\
+%      Approx.~Methods in Engineering Analysis & Advanced Fluid Mechanics \\
+%      Intermediate Thermodynamics & Sustainable Engineering \\
+%      Statistical Thermodynamics & Combustion \\
+%      \bottomrule
+%    \end{tabular}
+\end{itemize*}
+\smallskip
+\textbf{Xiamen University} - Xiamen, Fujian, China  \\
+\emph{Bachelor of Science, Chemistry; Mathematics Minor} \rdate{\textsc{July} 2009}
+\begin{itemize*}
+%  \item GPA: 3.4 in major, 3.0 overall; Mathematics Minor
+  \item Thesis: Study of Weak Interaction and Aromatic Carbon Atom in DREIDING Force Field
+%  \item Selected Coursework:\newline
+%    \begin{tabular}{ll}
+%      \addlinespace\toprule
+%
+%      \bottomrule
+%    \end{tabular}
+\end{itemize*}
+\smallskip
+\textbf{Udacity} - \href{https://www.udacity.com/course/machine-learning-engineer-nanodegree--nd009}{Machine Learning Engineer Nanodegree} \hfill {\rdate{\textsc{February} 2016}} \newline
+\smallskip
+\textbf{Udacity} - \href{https://www.udacity.com/course/data-analyst-nanodegree--nd002}{Data Analyst Nanodegree} \hfill {\rdate{\textsc{September} 2015}}
+
+%\medskip
+
+\bigskip
+\mhead{Work History}
+\textbf{Google,} Mountain View, CA \newline
+\emph{Software Engineer} \rdate{\textsc{Jan}~2017 - \textsc{present}}
+\begin{itemize*}
+ \item Analyze large scale of data for better user experience in Ads
+\end{itemize*}
+
+\smallskip
+
+\textbf{University of Houston,} Houston, TX \newline
+\emph{Post Doctoral Fellow } \rdate{\textsc{September}~2016 - \textsc{November}~2016}
+\begin{itemize*}
+  \item Identified electron transfer coordinates in Donor-Bridge-Acceptor systems using mode projection analysis
+\end{itemize*}
+
+\smallskip
+
+\textbf{University of Houston,} Houston, TX \newline
+\emph{Research} \& \emph{Teaching Assistant} \rdate{\textsc{August}~2010 - \textsc{May}~2016}
+\begin{itemize*}
+  \item Developed and coded in Mathematica a new theoretical molecular dynamics analysis scheme based on Lanczos algorithm and time-convolutionless master equation
+  \item Benchmarked the scheme with a classical series of molecules and researched the dynamics
+  \item Optimized the geometry of tripodal amine-Cu(I) complexes using density functional theory (DFT), to assist further research of their reactivity and stability
+%   against molecular oxygen oxidation and ligand dissociation/exchange.
+%  \item Collaborate to maintain Linux servers in the lab
+  \item Taught general and physical chemistry labs independently. Instruments used include UV/VIS, FT-IR, ESR, NMR, STM and XRD
+\end{itemize*}
+
+\bigskip
+%\mhead{Software \newline Proficiencies}%
+\mhead{Skills}%
+\textbf{Working Knowledge}\newline%?comfortable using in a professional setting
+Python, Mathematica, R, HTML/CSS, D3.js, Octave/MATLAB, SQL, TensorFlow, SAS, Vim, Linux, \LaTeX,
+Q-Chem, Gaussian, various chemistry instruments
+%various quantum chemistry software
+
+\smallskip
+%\medskip
+\textbf{Basic Knowledge}\newline%?would require some training/use to refresh my memory
+JavaScript, OpenCV, MongoDB,  Hadoop, HBase, Pig, Hive, Spark, Splunk, FORTRAN, C, Haskell
+
+\smallskip
+\textbf{Languages}\\
+Fluent in English, Chinese. Proficient in Taiwanese.
+
+\bigskip
+
+\mhead{Project \newline Experience}%
+\href{https://github.com/tcya/pseudo-hologram-video-maker}{Pseudo-hologram Video Maker} \hfill {\rdate{\textsc{May} 2016}}
+\begin{itemize*}
+  \item \href{http://tcya.pythonanywhere.com/}{Deployed} an OpenCV-based program online for pseudo-hologram video conversion using Flask
+ \end{itemize*}
+
+\smallskip
+\href{https://github.com/tcya/tensorflow/tree/master/tensorflow}{English Letter Recognition} \hfill {\rdate{\textsc{February} 2016}}
+\begin{itemize*}
+  \item Trained a 6 layer convolutional neural network with 95\% accuracy on \href{http://yaroslavvb.blogspot.com/2011/09/notmnist-dataset.html}{notMNIST} dataset using TensorFlow
+\end{itemize*}
+
+\smallskip
+\href{https://github.com/tcya/Vervet-monkey-alarm-clustering}{Clustering of Vervet Monkey's Alarms}\hfill {\rdate{\textsc{February} 2016}}
+\begin{itemize*}
+  \item Verified the classical discovery of three types  of alarms in vervet monkey by hierarchical, k-means and partitioning around medoids (PAM)  clustering, achieved at least 75\% classification accuracy
+  \item Built an AdaBoost model with 99\% prediction accuracy
+\end{itemize*}
+
+\smallskip
+\href{https://github.com/tcya/Q-Learning-Smartcab}{Train a Smartcab to Drive}\hfill {\rdate{\textsc{January} 2016}}
+\begin{itemize*}
+  \item Taught toy smartcab traffic laws and best routing strategy with Q-learning. The driving agent was able to consistently reach the destination within allotted time with 95\% success rate
+ \end{itemize*}
+
+\smallskip
+\href{https://github.com/tcya/udacity-forum-hadoop-analysis}{Forum Data Analysis} \hfill {\rdate{\textsc{October} 2015}}
+\begin{itemize*}
+  \item Analyzed the posts on Udacity's forum using Hadoop MapReduce codes
+\end{itemize*}
+
+\smallskip
+\href{https://github.com/tcya/PISA-visualization}{PISA Data Visualization} \hfill {\rdate{\textsc{September} 2015}}
+\begin{itemize*}
+  \item Explored the relations between family possessions and student scores in the Programme for International Student Assessment (PISA) data using R and Python
+  \item \href{http://bl.ocks.org/tcya/raw/4cd4f0dbc263310f0de62e4859f170c0/}{Visualized} the analysis with interactions using D3.js and dimple.js
+\end{itemize*}
+%
+%\smallskip
+%\href{https://github.com/tcya/what-affects-red-wine-quality}{Red Wine Study} \hfill {\rdate{\textsc{September} 2015}}
+%\begin{itemize*}
+%  \item Modeled the influence of various chemicals to red wine quality on a wine \href{https://s3.amazonaws.com/udacity-hosted-downloads/ud651/wineQualityInfo.txt}{dataset} by linear regression with Lasso in RStudio
+%\end{itemize*}
+
+\smallskip
+\href{https://github.com/tcya/Increment_by_1_Turing_machine}{Increased-by-one Single Tape Turing Machine}\hfill {\rdate{\textsc{June} 2015}} \begin{itemize*}
+  \item Implemented an increased-by-one single tape Turing machine program with only HTML/CSS, inspired by a \href{https://stackoverflow.com/questions/2497146/is-css-turing-complete}{discussion} of the Turing completeness of HTML/CSS
+\end{itemize*}
+%
+%\smallskip
+%\href{https://github.com/tcya/Identify-Enron-Corporate-Fraud}{Identifying Fraud from Enron Email} \hfill {\rdate{\textsc{May} 2015}}
+%\begin{itemize*}
+%  \item Investigated the Enron email corpus data with decision tree, Gaussian naive Bayesian, and k-means clustering machine learning techniques
+%\end{itemize*}
+%
+\smallskip
+\href{https://github.com/tcya/houston-mapdata-wrangling}{Houston Map Data Wrangling} \hfill {\rdate{\textsc{May} 2015}}
+\begin{itemize*}
+  \item Cleaned the map data on \href{www.openstreetmap.org}{openstreetmap} of the great Houston area (file size > 500M)
+  \item Analyzed the cleaned data with MongoDB queries
+\end{itemize*}
+
+%\smallskip
+%\href{https://github.com/tcya/new-york-subway-data-analysis}{New York Subway Data Analysis} \hfill {\rdate{\textsc{May} 2015}}
+%\begin{itemize*}
+%\item Statistically tested the relation between the ridership of subway and weather in New York
+%\end{itemize*}
+
+\smallskip
+\href{https://github.com/tcya/Essential-Hayek-Translation}{<The Essential Hayek> Translation} \hfill {\rdate{\textsc{March} 2016}}
+\begin{itemize*}
+  \item Translated  <\href{http://www.essentialhayek.org/}{The Essential Hayek}> voluntarily to Chinese
+\end{itemize*}
+
+\bigskip
+
+\mhead{Certificates}%
+%\textbf{Udacity:} 6 computer science courses (certificates available on my LinkedIn) \\
+%\textbf{edX:} 2 computer science courses (certificates available on my LinkedIn)\\
+%\textbf{Coursera:} 2 computer science courses (certificates available on my LinkedIn)
+\href{https://www.youracclaim.com/badges/f8a22186-fc1d-4434-b237-bf3cabef9ea8/linked_in_profile}{SAS Certified Base Programmer for SAS 9 Credential}\\
+11 computer science courses on edX, Coursera and Udacity (certificates available on my \href{https://www.linkedin.com/in/xunmoyang}{LinkedIn})
+
+\bigskip
+\mhead{Publications}%
+\href{https://www.nature.com/articles/ncomms14554}{\textbf{Identifying electron transfer coordinates in donor-bridge-acceptor systems using mode projection}}\\
+\href{https://www.nature.com/articles/ncomms14554}{\textbf{analysis}}\\
+Xunmo Yang, Theo Keane, Milan Delor, Anthony J. H. M. Meijer, Julia Weinstein \& Eric R. Bittner. \emph{Nature Communications}, \textbf{2017}, \emph{8}, 14554
+
+\href{http://pubs.acs.org/doi/abs/10.1021/jp503041y}{\textbf{Intramolecular Charge and Energy Transfer Rates with Reduced Modes: Comparison to Marcus Theory for Donor-Bridge-Acceptor Systems}}\\
+Xunmo Yang and Eric Bittner. \emph{The Journal of Physical Chemistry A}, \textbf{2014}, \emph{118}(28), pp 5196-5203
+
+\href{http://scitation.aip.org/content/aip/journal/jcp/142/24/10.1063/1.4923191}{\textbf{Computing Intramolecular Charge and Energy Transfer Rates using Optimal Modes}}\\
+Xunmo Yang and Eric Bittner. \emph{The Journal of Chemical Physics, \emph{142}, 244114 (2015)}
+
+\href{http://pubs.rsc.org/-/content/articlelanding/2017/cy/c7cy00587c/unauth#!divAbstract}{\textbf{Tripodal Amine Ligands for Accelerating Cu-Catalyzed Azide-Alkyne Cycloaddition: Efficiency and Stability against Oxidation and Dissociation}}\\
+Zhiling Zhu, Haoqing Chen, Siheng Li, Xunmo Yang, Eric Bittner, Chengzhi Cai. \emph{Catalysis Science \& Technology}, \textbf{2017}, 7, 2474-2485  
+
+\bigskip
+\mhead{Patent}%
+\href{https://www.google.com/patents/CN2665845Y?cl=en}{Coriolis force experiment plate} \quad\quad\quad\quad No.: CN 2665845 Y  \quad\quad\quad\quad Issued: 12/22/2004
+
+\end{document}
